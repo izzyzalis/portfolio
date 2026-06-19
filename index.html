@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Isaac Zalis — Data & Business Analyst</title>
+<meta name="description" content="Isaac Zalis — Data/Business Analyst portfolio. MIS graduate from San José State University, MSBA candidate at Cal State East Bay. Live Tableau dashboard, project case studies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+<style>
+  :root {
+    --color-primary: #18181B;
+    --color-on-primary: #FFFFFF;
+    --color-secondary: #3F3F46;
+    --color-accent: #2563EB;
+    --color-accent-soft: #EAF0FE;
+    --color-background: #FAFAFA;
+    --color-surface: #FFFFFF;
+    --color-foreground: #09090B;
+    --color-muted: #71717A;
+    --color-muted-bg: #F1F2F4;
+    --color-border: #E4E4E7;
+    --max-width: 1080px;
+    --font-display: 'Archivo', -apple-system, sans-serif;
+    --font-body: 'Space Grotesk', -apple-system, sans-serif;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background: var(--color-background);
+    color: var(--color-foreground);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  a { color: var(--color-accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
+
+  .wrap { max-width: var(--max-width); margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- Nav ---------- */
+  nav.subnav {
+    position: sticky;
+    top: 0;
+    background: rgba(250,250,250,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 20;
+  }
+  nav.subnav .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 28px;
+  }
+  nav.subnav .brand { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; color: var(--color-foreground); }
+  nav.subnav .links { display: flex; gap: 26px; font-size: 0.9rem; font-weight: 500; }
+  nav.subnav .links a { color: var(--color-secondary); }
+  nav.subnav .links a:hover { color: var(--color-accent); text-decoration: none; }
+
+  /* ---------- Hero ---------- */
+  header.hero { padding: 96px 0 64px; position: relative; overflow: hidden; }
+  header.hero::before {
+    content: "";
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, var(--color-accent-soft) 0%, transparent 70%);
+    z-index: 0;
+  }
+  header.hero .wrap { position: relative; z-index: 1; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.8rem; font-weight: 600; color: var(--color-accent);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 18px;
+  }
+  .eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--color-accent); animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+  header.hero h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); margin: 0 0 10px; font-weight: 800; }
+  header.hero .role { font-size: 1.15rem; color: var(--color-secondary); font-weight: 500; margin-bottom: 20px; }
+  header.hero p.summary { max-width: 620px; color: var(--color-secondary); font-size: 1.05rem; }
+
+  .contact-row { margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 20px; border-radius: 8px;
+    font-size: 0.92rem; font-weight: 600;
+    cursor: pointer; transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+    border: 1px solid var(--color-border);
+  }
+  .btn-primary { background: var(--color-primary); color: var(--color-on-primary); border-color: var(--color-primary); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px -8px rgba(0,0,0,0.4); text-decoration: none; }
+  .btn-ghost { background: var(--color-surface); color: var(--color-foreground); }
+  .btn-ghost:hover { transform: translateY(-2px); border-color: var(--color-accent); text-decoration: none; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 72px 0; border-top: 1px solid var(--color-border); }
+  section.hero-section { border-top: none; }
+  .section-head { margin-bottom: 36px; }
+  .section-label { font-size: 0.8rem; font-weight: 700; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+  section h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin: 0; }
+  .section-sub { color: var(--color-muted); margin-top: 8px; max-width: 600px; }
+
+  /* ---------- Reveal animation ---------- */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ---------- Featured project w/ live embed ---------- */
+  .featured {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .featured-head { padding: 28px 28px 0; }
+  .featured-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--color-accent-soft); color: var(--color-accent);
+    font-size: 0.78rem; font-weight: 700; padding: 4px 12px;
+    border-radius: 999px; margin-bottom: 14px;
+  }
+  .featured h3 { font-size: 1.35rem; margin: 0 0 6px; }
+  .featured .when { font-size: 0.85rem; color: var(--color-muted); }
+  .featured-body { padding: 16px 28px 28px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: start; }
+  .featured-copy ul { margin: 0; padding-left: 20px; color: var(--color-secondary); font-size: 0.96rem; }
+  .featured-copy ul li { margin-bottom: 10px; }
+  .featured-copy ul li:last-child { margin-bottom: 0; }
+  .featured-copy .impact {
+    margin-top: 16px; padding: 14px 16px;
+    background: var(--color-muted-bg); border-radius: 10px;
+    font-size: 0.9rem; color: var(--color-foreground); border-left: 3px solid var(--color-accent);
+  }
+
+  .viz-card {
+    background: var(--color-primary);
+    border-radius: 12px;
+    padding: 12px;
+  }
+  .viz-card tableau-viz {
+    width: 100%;
+    height: 480px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: block;
+  }
+  .viz-fallback {
+    display: none;
+    color: #fff; font-size: 0.88rem; text-align: center; padding: 60px 16px;
+  }
+  .viz-card.no-js .viz-fallback { display: block; }
+  .viz-link { margin-top: 10px; text-align: center; font-size: 0.85rem; }
+  .viz-link a { color: #93C5FD; }
+
+  .tags { margin: 10px 0 16px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { background: var(--color-muted-bg); color: var(--color-secondary); font-size: 0.78rem; font-weight: 600; padding: 4px 11px; border-radius: 999px; }
+  .featured .tag { background: var(--color-accent-soft); color: var(--color-accent); }
+
+  /* ---------- Project grid (secondary) ---------- */
+  .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .project-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 24px;
+    transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out), border-color 220ms var(--ease-out);
+  }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -16px rgba(0,0,0,0.18); border-color: var(--color-accent); }
+  .project-card h3 { font-size: 1.05rem; margin: 0 0 4px; }
+  .project-card .when { font-size: 0.82rem; color: var(--color-muted); }
+  .project-card ul { margin: 12px 0 0; padding-left: 18px; color: var(--color-secondary); font-size: 0.9rem; }
+  .project-card ul li { margin-bottom: 7px; }
+  .project-card ul li:last-child { margin-bottom: 0; }
+
+  @media (max-width: 900px) {
+    .featured-body { grid-template-columns: 1fr; }
+    .project-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Skills ---------- */
+  .grid-two { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+  .skills-group { margin-bottom: 22px; }
+  .skills-group:last-child { margin-bottom: 0; }
+  .skills-group .label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-muted); margin-bottom: 12px; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill { border: 1px solid var(--color-border); background: var(--color-surface); padding: 7px 14px; border-radius: 8px; font-size: 0.88rem; }
+
+  @media (max-width: 640px) {
+    .grid-two { grid-template-columns: 1fr; gap: 28px; }
+    header.hero { padding: 68px 0 44px; }
+    nav.subnav .links { gap: 16px; font-size: 0.82rem; }
+  }
+
+  /* ---------- Education ---------- */
+  .edu-item { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--color-border); flex-wrap: wrap; }
+  .edu-item:last-child { border-bottom: none; }
+  .edu-item .school { font-weight: 700; font-family: var(--font-display); }
+  .edu-item .deg { color: var(--color-secondary); font-size: 0.92rem; }
+  .edu-item .when { font-size: 0.85rem; color: var(--color-muted); white-space: nowrap; }
+
+  footer { padding: 48px 0 64px; text-align: center; color: var(--color-muted); font-size: 0.88rem; }
+  footer a { color: var(--color-muted); }
+  .footer-link-btn {
+    background: none; border: none; padding: 0; margin: 0;
+    color: var(--color-muted); font-size: 0.88rem; font-family: var(--font-body);
+    cursor: pointer; text-decoration: underline; text-underline-offset: 2px;
+  }
+  .footer-link-btn:hover { color: var(--color-accent); }
+
+  /* ---------- Phone popover ---------- */
+  .phone-popover {
+    position: fixed;
+    z-index: 50;
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 16px 40px -12px rgba(0,0,0,0.45);
+    min-width: 200px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(6px) scale(0.97);
+    transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
+    pointer-events: none;
+  }
+  .phone-popover.is-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+  .phone-popover-number { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; letter-spacing: 0.01em; margin-bottom: 10px; }
+  .phone-popover-call {
+    display: inline-block; background: var(--color-on-primary); color: var(--color-primary);
+    font-size: 0.85rem; font-weight: 600; padding: 7px 16px; border-radius: 7px;
+  }
+  .phone-popover-call:hover { text-decoration: none; opacity: 0.9; }
+</style>
+</head>
+<body>
+
+<nav class="subnav">
+  <div class="wrap">
+    <span class="brand">Isaac Zalis</span>
+    <div class="links">
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero hero-section">
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Open to full-time roles</div>
+    <h1>Isaac Zalis</h1>
+    <div class="role">MIS &amp; Analytics Professional</div>
+    <p class="summary">
+      MIS graduate from San José State University who builds tools and dashboards that turn raw
+      data into decisions — Tableau, SQL, Python, and a bit of OCR and LLM tooling along the way.
+      Currently pursuing a Master's in Business Analytics at Cal State East Bay.
+    </p>
+    <div class="contact-row">
+      <a class="btn btn-primary" href="mailto:izzyzalis@gmail.com">Email me</a>
+      <button type="button" class="btn btn-ghost" data-popover-trigger="cell" aria-haspopup="dialog" aria-expanded="false">Cell number</button>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/isaac-zalis" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-ghost" href="#projects">View the live dashboard ↓</a>
+    </div>
+  </div>
+</header>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label">Selected Work</div>
+      <h2>Projects</h2>
+      <p class="section-sub">Four projects from coursework and independent build — including a dashboard that's actually live and interactive below, not just a screenshot.</p>
+    </div>
+
+    <!-- Featured: live Tableau embed -->
+    <div class="featured reveal">
+      <div class="featured-head">
+        <span class="featured-badge">● Live interactive dashboard</span>
+        <h3>Classroom Data Analytics Dashboard</h3>
+        <div class="when">Team project · Fall 2024 · Built for SJSU's Parking &amp; IT departments</div>
+      </div>
+      <div class="featured-body">
+        <div class="featured-copy">
+          <div class="tags">
+            <span class="tag">Tableau</span>
+            <span class="tag">Data Cleaning</span>
+            <span class="tag">Team of 6</span>
+          </div>
+          <ul>
+            <li>Worked on a 6-person team to analyze classroom usage data that SJSU's parking department needed for space-planning decisions.</li>
+            <li>Built a heat map with 15-minute-increment granularity and a date/time selector, plus a comparison bar chart and a multi-year trend chart.</li>
+            <li>Presented results directly to the parking department and IT team — both fully accepted the deliverables.</li>
+          </ul>
+          <div class="impact">Our prototype was accepted as the model for IT's own build-out — try the heat map yourself on the right.</div>
+        </div>
+        <div class="viz-card">
+          <tableau-viz
+            id="classroomViz"
+            src="https://public.tableau.com/views/SJSUClassroomAnalyticsDashboard/Heatmap"
+            toolbar="bottom"
+            hide-tabs>
+          </tableau-viz>
+          <div class="viz-fallback">Dashboard preview unavailable in this view.</div>
+          <div class="viz-link"><a href="https://public.tableau.com/views/SJSUClassroomAnalyticsDashboard/Heatmap" target="_blank" rel="noopener">Open full dashboard on Tableau Public ↗</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary project grid -->
+    <div class="project-grid">
+      <div class="project-card reveal">
+        <h3>Aqua Analyzer</h3>
+        <div class="when">Spring 2025</div>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Streamlit</span>
+          <span class="tag">OCR + GPT-3</span>
+        </div>
+        <ul>
+          <li>Streamlit app that automates extraction and summarization of monthly water quality reports — no manual data entry.</li>
+          <li>OCR pipeline parses PDF reports and flags compliance issues automatically.</li>
+          <li>Used GPT-3 to draft plain-language advisory summaries, then reviewed for accuracy.</li>
+        </ul>
+      </div>
+
+      <div class="project-card reveal">
+        <h3>Equipment Check-Out System Enhancement</h3>
+        <div class="when">Fall 2024</div>
+        <div class="tags">
+          <span class="tag">Systems Analysis</span>
+          <span class="tag">SDLC</span>
+        </div>
+        <ul>
+          <li>Diagnosed process inefficiencies in an equipment check-out system for a small consulting firm.</li>
+          <li>Ran requirements analysis through stakeholder interviews and workflow mapping.</li>
+          <li>Designed DFDs, use case diagrams, and ERDs; delivered a feasibility study and technical spec.</li>
+        </ul>
+      </div>
+
+      <div class="project-card reveal">
+        <h3>Rock Solid Industrial Parts — Case Study</h3>
+        <div class="when">Spring 2025</div>
+        <div class="tags">
+          <span class="tag">Business Strategy</span>
+          <span class="tag">Case Analysis</span>
+        </div>
+        <ul>
+          <li>Analyzed a plan to scale a family-owned industrial parts company from $33M to $72M in revenue over three years.</li>
+          <li>Assessed how outdated systems across Sales, Finance, Warehouse, IT, and HR would constrain expansion.</li>
+          <li>Recommended a digital transformation roadmap to support the growth plan.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label">Toolkit</div>
+      <h2>Skills &amp; Certifications</h2>
+    </div>
+    <div class="grid-two reveal">
+      <div>
+        <div class="skills-group">
+          <div class="label">Tools</div>
+          <div class="pill-row">
+            <span class="pill">Tableau</span>
+            <span class="pill">SQL</span>
+            <span class="pill">Excel</span>
+            <span class="pill">Google Sheets</span>
+            <span class="pill">Python</span>
+            <span class="pill">Streamlit</span>
+          </div>
+        </div>
+        <div class="skills-group">
+          <div class="label">Technical</div>
+          <div class="pill-row">
+            <span class="pill">Data Cleaning</span>
+            <span class="pill">Dashboard Design</span>
+            <span class="pill">Systems Design</span>
+            <span class="pill">Process Analysis</span>
+            <span class="pill">LLM / GPT Integration</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="skills-group">
+          <div class="label">Certification</div>
+          <div class="pill-row">
+            <span class="pill">Google Data Analytics Professional Certificate (2025)</span>
+          </div>
+        </div>
+        <div class="skills-group">
+          <div class="label">Soft Skills</div>
+          <div class="pill-row">
+            <span class="pill">Collaboration</span>
+            <span class="pill">Communication</span>
+            <span class="pill">Adaptability</span>
+            <span class="pill">Problem Solving</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-label">Background</div>
+      <h2>Education</h2>
+    </div>
+    <div class="reveal">
+      <div class="edu-item">
+        <div>
+          <div class="school">Cal State East Bay</div>
+          <div class="deg">Master of Science, Business Analytics</div>
+        </div>
+        <div class="when">Aug 2026 – Present</div>
+      </div>
+      <div class="edu-item">
+        <div>
+          <div class="school">San José State University</div>
+          <div class="deg">B.S., Business Administration — Management Information Systems</div>
+        </div>
+        <div class="when">Aug 2023 – May 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Isaac Zalis · <a href="mailto:izzyzalis@gmail.com">izzyzalis@gmail.com</a> · <button type="button" class="footer-link-btn" data-popover-trigger="cell" aria-haspopup="dialog" aria-expanded="false">Cell number</button> · <a href="https://www.linkedin.com/in/isaac-zalis" target="_blank" rel="noopener">LinkedIn</a></p>
+  </div>
+</footer>
+
+<div id="phonePopover" class="phone-popover" role="dialog" aria-modal="false" aria-label="Phone number" hidden>
+  <div class="phone-popover-number">925-628-2202</div>
+  <a class="phone-popover-call" href="tel:+19256282202">Call</a>
+</div>
+
+<script>
+  // Phone number popover: triggers stay hidden behind a button until clicked
+  (function () {
+    var popover = document.getElementById('phonePopover');
+    var triggers = document.querySelectorAll('[data-popover-trigger="cell"]');
+    var activeTrigger = null;
+
+    function positionPopover(trigger) {
+      var rect = trigger.getBoundingClientRect();
+      var popRect = popover.getBoundingClientRect();
+      var top = rect.bottom + 10;
+      var left = rect.left + (rect.width / 2) - (popRect.width / 2);
+      left = Math.max(12, Math.min(left, window.innerWidth - popRect.width - 12));
+      if (top + popRect.height > window.innerHeight - 12) {
+        top = rect.top - popRect.height - 10;
+      }
+      popover.style.top = top + 'px';
+      popover.style.left = left + 'px';
+    }
+
+    function openPopover(trigger) {
+      activeTrigger = trigger;
+      popover.hidden = false;
+      positionPopover(trigger);
+      requestAnimationFrame(function () { popover.classList.add('is-open'); });
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+
+    function closePopover() {
+      if (!activeTrigger) return;
+      popover.classList.remove('is-open');
+      activeTrigger.setAttribute('aria-expanded', 'false');
+      var trigger = activeTrigger;
+      activeTrigger = null;
+      setTimeout(function () { if (!activeTrigger) popover.hidden = true; }, 160);
+    }
+
+    triggers.forEach(function (trigger) {
+      trigger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (activeTrigger === trigger) { closePopover(); }
+        else { closePopover(); openPopover(trigger); }
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (activeTrigger && !popover.contains(e.target) && e.target !== activeTrigger) {
+        closePopover();
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closePopover();
+    });
+    window.addEventListener('resize', function () { if (activeTrigger) positionPopover(activeTrigger); });
+    window.addEventListener('scroll', function () { if (activeTrigger) positionPopover(activeTrigger); }, true);
+  })();
+</script>
+
+<script>
+  // Scroll-reveal via IntersectionObserver, respecting reduced-motion
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var revealEls = document.querySelectorAll('.reveal');
+  if (prefersReduced || !('IntersectionObserver' in window)) {
+    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+  } else {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(function (el) { obs.observe(el); });
+  }
+
+  // Fallback messaging if the Tableau embed fails to load
+  (function () {
+    var vizCard = document.querySelector('.viz-card');
+    var viz = document.getElementById('classroomViz');
+    var failTimer = setTimeout(function () {
+      if (!viz || !viz.shadowRoot) { vizCard.classList.add('no-js'); }
+    }, 6000);
+    if (viz) {
+      viz.addEventListener('firstinteractive', function () { clearTimeout(failTimer); });
+      viz.addEventListener('vizloaderror', function () { vizCard.classList.add('no-js'); clearTimeout(failTimer); });
+    }
+  })();
+</script>
+
+</body>
+</html>
