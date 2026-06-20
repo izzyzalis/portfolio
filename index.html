@@ -3,28 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Isaac Zalis — Data & Business Analyst</title>
-<meta name="description" content="Isaac Zalis — Data/Business Analyst portfolio. MIS graduate from San José State University, MSBA candidate at Cal State East Bay. Live Tableau dashboard, project case studies.">
+<title>Isaac Zalis — MIS &amp; Analytics Professional</title>
+<meta name="description" content="Isaac Zalis — MIS &amp; Analytics portfolio. MIS graduate from San José State University, MSBA candidate at Cal State East Bay. Live Tableau dashboard, interactive project case studies, and an AI chatbot you can ask about him.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
 <style>
   :root {
-    --color-primary: #18181B;
-    --color-on-primary: #FFFFFF;
-    --color-secondary: #3F3F46;
-    --color-accent: #2563EB;
-    --color-accent-soft: #EAF0FE;
-    --color-background: #FAFAFA;
-    --color-surface: #FFFFFF;
-    --color-foreground: #09090B;
-    --color-muted: #71717A;
-    --color-muted-bg: #F1F2F4;
-    --color-border: #E4E4E7;
+    --color-primary: #FAFAFA;
+    --color-on-primary: #0B0B0F;
+    --color-secondary: #A1A1AA;
+    --color-accent: #60A5FA;
+    --color-accent-soft: rgba(96,165,250,0.14);
+    --color-background: #0B0B0F;
+    --color-surface: #16161A;
+    --color-surface-2: #1C1C21;
+    --color-foreground: #FAFAFA;
+    --color-muted: #A1A1AA;
+    --color-muted-2: #71717A;
+    --color-muted-bg: #1C1C21;
+    --color-border: #27272A;
     --max-width: 1080px;
     --font-display: 'Archivo', -apple-system, sans-serif;
     --font-body: 'Space Grotesk', -apple-system, sans-serif;
+    --font-mono: 'Space Mono', 'SF Mono', Consolas, monospace;
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
@@ -57,7 +60,7 @@
   nav.subnav {
     position: sticky;
     top: 0;
-    background: rgba(250,250,250,0.85);
+    background: rgba(11,11,15,0.85);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--color-border);
     z-index: 20;
@@ -74,12 +77,12 @@
   nav.subnav .links a:hover { color: var(--color-accent); text-decoration: none; }
 
   /* ---------- Hero ---------- */
-  header.hero { padding: 96px 0 64px; position: relative; overflow: hidden; }
+  header.hero { padding: 96px 0 56px; position: relative; overflow: hidden; }
   header.hero::before {
     content: "";
     position: absolute;
-    top: -120px; right: -120px;
-    width: 360px; height: 360px;
+    top: -140px; right: -140px;
+    width: 400px; height: 400px;
     background: radial-gradient(circle, var(--color-accent-soft) 0%, transparent 70%);
     z-index: 0;
   }
@@ -97,30 +100,44 @@
   header.hero .role { font-size: 1.15rem; color: var(--color-secondary); font-weight: 500; margin-bottom: 20px; }
   header.hero p.summary { max-width: 620px; color: var(--color-secondary); font-size: 1.05rem; }
 
-  .contact-row { margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .stat-row { margin-top: 26px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 420px; }
+  .stat-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 10px; padding: 12px 14px; }
+  .stat-card .num { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; }
+  .stat-card .label { font-size: 0.74rem; color: var(--color-muted); margin-top: 2px; }
+
+  .contact-row { margin-top: 24px; display: flex; gap: 14px; flex-wrap: wrap; }
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 11px 20px; border-radius: 8px;
     font-size: 0.92rem; font-weight: 600;
     cursor: pointer; transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
     border: 1px solid var(--color-border);
+    font-family: var(--font-body);
   }
   .btn-primary { background: var(--color-primary); color: var(--color-on-primary); border-color: var(--color-primary); }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px -8px rgba(0,0,0,0.4); text-decoration: none; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px -8px rgba(0,0,0,0.6); text-decoration: none; }
   .btn-ghost { background: var(--color-surface); color: var(--color-foreground); }
   .btn-ghost:hover { transform: translateY(-2px); border-color: var(--color-accent); text-decoration: none; }
 
   /* ---------- Sections ---------- */
   section { padding: 72px 0; border-top: 1px solid var(--color-border); }
   section.hero-section { border-top: none; }
-  .section-head { margin-bottom: 36px; }
+  .section-head { margin-bottom: 32px; }
   .section-label { font-size: 0.8rem; font-weight: 700; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
   section h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin: 0; }
   .section-sub { color: var(--color-muted); margin-top: 8px; max-width: 600px; }
 
-  /* ---------- Reveal animation ---------- */
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); }
   .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ---------- Filter chips ---------- */
+  .chip-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .chip {
+    background: var(--color-surface); color: var(--color-muted); border: 1px solid var(--color-border);
+    border-radius: 999px; padding: 6px 15px; font-size: 0.82rem; font-weight: 600; cursor: pointer;
+    font-family: var(--font-body); transition: all 160ms var(--ease-out);
+  }
+  .chip.is-active { background: var(--color-accent); color: #042C53; border-color: var(--color-accent); }
 
   /* ---------- Featured project w/ live embed ---------- */
   .featured {
@@ -128,7 +145,7 @@
     border: 1px solid var(--color-border);
     border-radius: 16px;
     overflow: hidden;
-    margin-bottom: 28px;
+    margin-bottom: 22px;
   }
   .featured-head { padding: 28px 28px 0; }
   .featured-badge {
@@ -149,22 +166,9 @@
     font-size: 0.9rem; color: var(--color-foreground); border-left: 3px solid var(--color-accent);
   }
 
-  .viz-card {
-    background: var(--color-primary);
-    border-radius: 12px;
-    padding: 12px;
-  }
-  .viz-card tableau-viz {
-    width: 100%;
-    height: 480px;
-    border-radius: 8px;
-    overflow: hidden;
-    display: block;
-  }
-  .viz-fallback {
-    display: none;
-    color: #fff; font-size: 0.88rem; text-align: center; padding: 60px 16px;
-  }
+  .viz-card { background: #000; border-radius: 12px; padding: 12px; }
+  .viz-card tableau-viz { width: 100%; height: 480px; border-radius: 8px; overflow: hidden; display: block; }
+  .viz-fallback { display: none; color: #fff; font-size: 0.88rem; text-align: center; padding: 60px 16px; }
   .viz-card.no-js .viz-fallback { display: block; }
   .viz-link { margin-top: 10px; text-align: center; font-size: 0.85rem; }
   .viz-link a { color: #93C5FD; }
@@ -174,7 +178,7 @@
   .featured .tag { background: var(--color-accent-soft); color: var(--color-accent); }
 
   /* ---------- Project grid (secondary) ---------- */
-  .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
   .project-card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -182,17 +186,92 @@
     padding: 24px;
     transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out), border-color 220ms var(--ease-out);
   }
-  .project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -16px rgba(0,0,0,0.18); border-color: var(--color-accent); }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -16px rgba(0,0,0,0.5); border-color: var(--color-accent); }
   .project-card h3 { font-size: 1.05rem; margin: 0 0 4px; }
   .project-card .when { font-size: 0.82rem; color: var(--color-muted); }
   .project-card ul { margin: 12px 0 0; padding-left: 18px; color: var(--color-secondary); font-size: 0.9rem; }
   .project-card ul li { margin-bottom: 7px; }
   .project-card ul li:last-child { margin-bottom: 0; }
 
+  .expand-btn {
+    margin-top: 14px; background: none; border: none; padding: 0; color: var(--color-accent);
+    font-family: var(--font-body); font-size: 0.86rem; font-weight: 600; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .expand-btn .chev { transition: transform 200ms var(--ease-out); display: inline-block; }
+  .expand-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+
+  .detail-panel {
+    grid-column: 1 / -1;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin-top: -2px;
+  }
+  .detail-panel[hidden] { display: none; }
+
   @media (max-width: 900px) {
     .featured-body { grid-template-columns: 1fr; }
     .project-grid { grid-template-columns: 1fr; }
   }
+
+  /* ---------- Code tabs (Aqua Analyzer) ---------- */
+  .code-tabs { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+  .code-tab {
+    background: var(--color-muted-bg); color: var(--color-muted); border: 1px solid var(--color-border);
+    border-radius: 7px; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+    font-family: var(--font-body);
+  }
+  .code-tab.is-active { background: var(--color-accent-soft); color: var(--color-accent); border-color: var(--color-accent); }
+  .code-block {
+    background: #000; border-radius: 10px; padding: 16px 18px; overflow-x: auto;
+    font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.6; color: #D4D4D8;
+  }
+  .code-block[hidden] { display: none; }
+  .code-block .kw { color: #C792EA; }
+  .code-block .str { color: #A5D6A7; }
+  .code-block .cm { color: #71717A; }
+  .code-caption { font-size: 0.84rem; color: var(--color-muted); margin-top: 10px; }
+
+  /* ---------- Diagram explorer (Equipment Check-Out) ---------- */
+  .diagram-explorer { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 20px; }
+  .node-list { display: flex; flex-direction: column; gap: 8px; }
+  .node-btn {
+    text-align: left; background: var(--color-muted-bg); border: 1px solid var(--color-border);
+    border-radius: 9px; padding: 10px 13px; cursor: pointer; font-family: var(--font-body);
+    color: var(--color-foreground); font-size: 0.88rem; font-weight: 600;
+  }
+  .node-btn .kind { display: block; font-size: 0.72rem; font-weight: 600; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
+  .node-btn.is-active { border-color: var(--color-accent); background: var(--color-accent-soft); }
+  .node-detail {
+    background: var(--color-muted-bg); border: 1px solid var(--color-border); border-radius: 10px;
+    padding: 16px 18px; font-size: 0.92rem; color: var(--color-secondary); min-height: 140px;
+  }
+  .node-detail h4 { margin: 0 0 8px; color: var(--color-foreground); font-size: 1rem; }
+  @media (max-width: 700px) { .diagram-explorer { grid-template-columns: 1fr; } }
+
+  /* ---------- Growth plan (Rock Solid) ---------- */
+  .growth-bar { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+  .growth-figure { font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; }
+  .growth-track { flex: 1; height: 10px; background: var(--color-muted-bg); border-radius: 999px; overflow: hidden; }
+  .growth-fill { height: 100%; width: 0%; background: var(--color-accent); border-radius: 999px; transition: width 1200ms var(--ease-out); }
+  .growth-caption { font-size: 0.8rem; color: var(--color-muted); text-align: center; margin-bottom: 22px; }
+  .dept-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+  .dept-tab {
+    background: var(--color-muted-bg); border: 1px solid var(--color-border); color: var(--color-muted);
+    border-radius: 7px; padding: 7px 13px; font-size: 0.82rem; font-weight: 600; cursor: pointer; font-family: var(--font-body);
+  }
+  .dept-tab.is-active { background: var(--color-accent-soft); color: var(--color-accent); border-color: var(--color-accent); }
+  .dept-panel { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; }
+  .dept-copy .row { margin-bottom: 12px; }
+  .dept-copy .row:last-child { margin-bottom: 0; }
+  .dept-copy .row-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-muted); margin-bottom: 4px; }
+  .dept-copy .row-text { font-size: 0.9rem; color: var(--color-secondary); }
+  .dept-benefit { background: var(--color-muted-bg); border-radius: 10px; padding: 16px; }
+  .dept-benefit .blabel { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-muted); margin-bottom: 8px; }
+  .dept-benefit .bstat { font-family: var(--font-display); font-weight: 800; color: var(--color-accent); font-size: 1.05rem; margin-bottom: 4px; }
+  @media (max-width: 700px) { .dept-panel { grid-template-columns: 1fr; } }
 
   /* ---------- Skills ---------- */
   .grid-two { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -206,6 +285,7 @@
     .grid-two { grid-template-columns: 1fr; gap: 28px; }
     header.hero { padding: 68px 0 44px; }
     nav.subnav .links { gap: 16px; font-size: 0.82rem; }
+    .stat-row { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
   }
 
   /* ---------- Education ---------- */
@@ -226,19 +306,10 @@
 
   /* ---------- Phone popover ---------- */
   .phone-popover {
-    position: fixed;
-    z-index: 50;
-    background: var(--color-primary);
-    color: var(--color-on-primary);
-    border-radius: 12px;
-    padding: 16px 20px;
-    box-shadow: 0 16px 40px -12px rgba(0,0,0,0.45);
-    min-width: 200px;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(6px) scale(0.97);
-    transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
-    pointer-events: none;
+    position: fixed; z-index: 50; background: var(--color-primary); color: var(--color-on-primary);
+    border-radius: 12px; padding: 16px 20px; box-shadow: 0 16px 40px -12px rgba(0,0,0,0.6);
+    min-width: 200px; text-align: center; opacity: 0; transform: translateY(6px) scale(0.97);
+    transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out); pointer-events: none;
   }
   .phone-popover.is-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
   .phone-popover-number { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; letter-spacing: 0.01em; margin-bottom: 10px; }
@@ -247,6 +318,51 @@
     font-size: 0.85rem; font-weight: 600; padding: 7px 16px; border-radius: 7px;
   }
   .phone-popover-call:hover { text-decoration: none; opacity: 0.9; }
+
+  /* ---------- Chatbot widget ---------- */
+  .chat-fab {
+    position: fixed; bottom: 22px; right: 22px; z-index: 60;
+    background: var(--color-accent); color: #042C53; border: none; border-radius: 999px;
+    padding: 13px 20px; font-family: var(--font-body); font-size: 0.9rem; font-weight: 700;
+    cursor: pointer; box-shadow: 0 10px 28px -8px rgba(96,165,250,0.5);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .chat-panel {
+    position: fixed; bottom: 88px; right: 22px; z-index: 60; width: 340px; max-height: 460px;
+    background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px;
+    display: flex; flex-direction: column; overflow: hidden;
+    box-shadow: 0 24px 60px -16px rgba(0,0,0,0.7);
+    opacity: 0; transform: translateY(10px) scale(0.97); pointer-events: none;
+    transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
+  }
+  .chat-panel.is-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+  .chat-head { padding: 14px 16px; border-bottom: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; }
+  .chat-head strong { font-size: 0.9rem; }
+  .chat-head span { font-size: 0.74rem; color: var(--color-muted); display: block; margin-top: 1px; }
+  .chat-close { background: none; border: none; color: var(--color-muted); cursor: pointer; font-size: 1.1rem; line-height: 1; padding: 4px; }
+  .chat-messages { flex: 1; overflow-y: auto; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; min-height: 220px; }
+  .chat-msg { font-size: 0.86rem; line-height: 1.5; padding: 9px 12px; border-radius: 10px; max-width: 88%; }
+  .chat-msg.bot { background: var(--color-muted-bg); color: var(--color-foreground); align-self: flex-start; }
+  .chat-msg.user { background: var(--color-accent); color: #042C53; align-self: flex-end; }
+  .chat-msg.err { background: rgba(228,75,74,0.12); color: #F09595; align-self: flex-start; }
+  .chat-suggest-row { display: flex; flex-wrap: wrap; gap: 6px; align-self: flex-start; max-width: 100%; }
+  .chat-suggest {
+    background: var(--color-muted-bg); border: 1px solid var(--color-border); color: var(--color-accent);
+    border-radius: 999px; padding: 5px 11px; font-size: 0.76rem; font-weight: 600; cursor: pointer;
+    font-family: var(--font-body);
+  }
+  .chat-suggest:hover { border-color: var(--color-accent); }
+  .chat-input-row { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--color-border); }
+  .chat-input-row input {
+    flex: 1; background: var(--color-muted-bg); border: 1px solid var(--color-border); border-radius: 8px;
+    padding: 9px 11px; color: var(--color-foreground); font-family: var(--font-body); font-size: 0.86rem;
+  }
+  .chat-input-row input::placeholder { color: var(--color-muted-2); }
+  .chat-input-row button {
+    background: var(--color-accent); color: #042C53; border: none; border-radius: 8px;
+    padding: 9px 14px; font-weight: 700; font-size: 0.86rem; cursor: pointer; font-family: var(--font-body);
+  }
+  .chat-input-row button:disabled { opacity: 0.5; cursor: default; }
 </style>
 </head>
 <body>
@@ -272,6 +388,13 @@
       data into decisions — Tableau, SQL, Python, and a bit of OCR and LLM tooling along the way.
       Currently pursuing a Master's in Business Analytics at Cal State East Bay.
     </p>
+
+    <div class="stat-row reveal">
+      <div class="stat-card"><div class="num" data-count="4">0</div><div class="label">Projects below</div></div>
+      <div class="stat-card"><div class="num" data-count="1">0</div><div class="label">Live dashboard</div></div>
+      <div class="stat-card"><div class="num" data-count="1">0</div><div class="label">Certification</div></div>
+    </div>
+
     <div class="contact-row">
       <a class="btn btn-primary" href="mailto:izzyzalis@gmail.com">Email me</a>
       <button type="button" class="btn btn-ghost" data-popover-trigger="cell" aria-haspopup="dialog" aria-expanded="false">Cell number</button>
@@ -286,11 +409,19 @@
     <div class="section-head reveal">
       <div class="section-label">Selected Work</div>
       <h2>Projects</h2>
-      <p class="section-sub">Four projects from coursework and independent build — including a dashboard that's actually live and interactive below, not just a screenshot.</p>
+      <p class="section-sub">Four projects from coursework and independent build. Click into any of them for the actual code, system diagrams, or numbers behind the work — not just a screenshot.</p>
+    </div>
+
+    <div class="chip-row reveal">
+      <button class="chip is-active" data-filter="all">All</button>
+      <button class="chip" data-filter="Tableau">Tableau</button>
+      <button class="chip" data-filter="Python">Python</button>
+      <button class="chip" data-filter="Systems">Systems</button>
+      <button class="chip" data-filter="Strategy">Strategy</button>
     </div>
 
     <!-- Featured: live Tableau embed -->
-    <div class="featured reveal">
+    <div class="featured reveal" data-tags="Tableau">
       <div class="featured-head">
         <span class="featured-badge">● Live interactive dashboard</span>
         <h3>Classroom Data Analytics Dashboard</h3>
@@ -325,22 +456,24 @@
 
     <!-- Secondary project grid -->
     <div class="project-grid">
-      <div class="project-card reveal">
+
+      <div class="project-card reveal" data-tags="Python">
         <h3>Aqua Analyzer</h3>
         <div class="when">Spring 2025</div>
         <div class="tags">
           <span class="tag">Python</span>
           <span class="tag">Streamlit</span>
-          <span class="tag">OCR + GPT-3</span>
+          <span class="tag">OCR + GPT-3.5</span>
         </div>
         <ul>
           <li>Streamlit app that automates extraction and summarization of monthly water quality reports — no manual data entry.</li>
-          <li>OCR pipeline parses PDF reports and flags compliance issues automatically.</li>
-          <li>Used GPT-3 to draft plain-language advisory summaries, then reviewed for accuracy.</li>
+          <li>A PyMuPDF text-extraction pipeline parses PDF reports so GPT can reason over the real numbers instead of a manual re-typing.</li>
+          <li>Used GPT-3.5 to draft plain-language advisory summaries and answer free-form resident questions, reviewed for accuracy.</li>
         </ul>
+        <button class="expand-btn" data-target="aqua-detail" aria-expanded="false">View the actual code <span class="chev">▾</span></button>
       </div>
 
-      <div class="project-card reveal">
+      <div class="project-card reveal" data-tags="Systems">
         <h3>Equipment Check-Out System Enhancement</h3>
         <div class="when">Fall 2024</div>
         <div class="tags">
@@ -348,13 +481,14 @@
           <span class="tag">SDLC</span>
         </div>
         <ul>
-          <li>Diagnosed process inefficiencies in an equipment check-out system for a small consulting firm.</li>
+          <li>Diagnosed process inefficiencies in a manual equipment check-out system that was losing the client over $50,000/year to lost or stolen tools.</li>
           <li>Ran requirements analysis through stakeholder interviews and workflow mapping.</li>
-          <li>Designed DFDs, use case diagrams, and ERDs; delivered a feasibility study and technical spec.</li>
+          <li>Designed the use cases, a Level 0 Data Flow Diagram, and ERDs behind the proposed system — explore them below.</li>
         </ul>
+        <button class="expand-btn" data-target="equip-detail" aria-expanded="false">Explore the system diagrams <span class="chev">▾</span></button>
       </div>
 
-      <div class="project-card reveal">
+      <div class="project-card reveal" data-tags="Strategy">
         <h3>Rock Solid Industrial Parts — Case Study</h3>
         <div class="when">Spring 2025</div>
         <div class="tags">
@@ -363,10 +497,107 @@
         </div>
         <ul>
           <li>Analyzed a plan to scale a family-owned industrial parts company from $33M to $72M in revenue over three years.</li>
-          <li>Assessed how outdated systems across Sales, Finance, Warehouse, IT, and HR would constrain expansion.</li>
-          <li>Recommended a digital transformation roadmap to support the growth plan.</li>
+          <li>Assessed how outdated systems across Sales, Finance, Warehouse, IT, and HR would constrain that expansion.</li>
+          <li>Recommended a phased digital-transformation roadmap — click through each department below.</li>
         </ul>
+        <button class="expand-btn" data-target="rsip-detail" aria-expanded="false">View the growth plan <span class="chev">▾</span></button>
       </div>
+
+      <!-- Aqua Analyzer detail panel -->
+      <div id="aqua-detail" class="detail-panel" data-tags="Python" hidden>
+        <p class="section-sub" style="margin-top:0;">
+          The live app (<a href="https://aqua-analyzer.streamlit.app/" target="_blank" rel="noopener">aqua-analyzer.streamlit.app</a>) is a bare Streamlit UI —
+          the interesting part is the pipeline behind it: pull text out of a PDF water-quality report, hand it to GPT, and serve the answer back conversationally.
+          Here's the actual code, lightly cleaned up.
+        </p>
+        <div class="code-tabs">
+          <button class="code-tab is-active" data-code="extract">1. Extract the PDF</button>
+          <button class="code-tab" data-code="ask">2. Ask GPT</button>
+          <button class="code-tab" data-code="ui">3. Streamlit chat UI</button>
+        </div>
+        <pre class="code-block" data-code-panel="extract"><span class="cm"># pulls the raw text out of the monthly water quality PDF</span>
+<span class="kw">import</span> fitz  <span class="cm"># PyMuPDF</span>
+
+<span class="kw">with</span> fitz.open(pdf_path) <span class="kw">as</span> doc:
+    extracted_text = <span class="str">""</span>.join(page.get_text() <span class="kw">for</span> page <span class="kw">in</span> doc)</pre>
+        <pre class="code-block" data-code-panel="ask" hidden><span class="cm"># sends the report text + the resident's question to GPT</span>
+<span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+client = OpenAI(api_key=os.environ[<span class="str">"OPENAI_API_KEY"</span>])
+
+prompt = (
+    <span class="str">f"This is a water quality report from San Jose.\n"</span>
+    <span class="str">f"Report content:\n{extracted_text}\n\n"</span>
+    <span class="str">f"Now answer this for someone who isn't a water expert:\n{user_question}"</span>
+)
+response = client.chat.completions.create(
+    model=<span class="str">"gpt-3.5-turbo"</span>,
+    messages=[
+        {<span class="str">"role"</span>: <span class="str">"system"</span>, <span class="str">"content"</span>: <span class="str">"You explain San Jose water conditions to residents."</span>},
+        {<span class="str">"role"</span>: <span class="str">"user"</span>, <span class="str">"content"</span>: prompt}
+    ]
+)
+answer = response.choices[0].message.content.strip()</pre>
+        <pre class="code-block" data-code-panel="ui" hidden><span class="kw">import</span> streamlit <span class="kw">as</span> st
+
+st.title(<span class="str">"💧 Valley Water Mineral Guide"</span>)
+user_question = st.chat_input(<span class="str">"Ask a question about the water report or minerals"</span>)
+
+<span class="kw">if</span> user_question:
+    <span class="kw">with</span> st.spinner(<span class="str">"Thinking..."</span>):
+        answer = ask_gpt(user_question)
+        st.markdown(<span class="str">f"**💡 Answer:** {answer}"</span>)</pre>
+        <p class="code-caption">Note: the key is loaded from an environment variable here, never hardcoded — basic hygiene for anything you'd actually ship.</p>
+      </div>
+
+      <!-- Equipment Check-Out detail panel -->
+      <div id="equip-detail" class="detail-panel" data-tags="Systems" hidden>
+        <p class="section-sub" style="margin-top:0;">This is the actual Level 0 Data Flow Diagram and use-case design from the project — click a piece to see what it does and why it was needed.</p>
+        <div class="diagram-explorer">
+          <div class="node-list" role="tablist" aria-label="System diagram components">
+            <button class="node-btn is-active" data-node="auth"><span class="kind">Process</span>User Authentication</button>
+            <button class="node-btn" data-node="manage"><span class="kind">Process</span>Equipment Management</button>
+            <button class="node-btn" data-node="inventory"><span class="kind">Process</span>Inventory Control</button>
+            <button class="node-btn" data-node="reporting"><span class="kind">Process</span>Reporting &amp; Alerts</button>
+            <button class="node-btn" data-node="usecase"><span class="kind">Use case</span>Check-Out Equipment</button>
+          </div>
+          <div class="node-detail" id="nodeDetail">
+            <h4>User Authentication</h4>
+            <p>Verifies an employee's identity before granting any system access — the original manual system had no access control at all, which let unqualified staff check out equipment they weren't trained on.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rock Solid detail panel -->
+      <div id="rsip-detail" class="detail-panel" data-tags="Strategy" hidden>
+        <p class="section-sub" style="margin-top:0;">RSIP's 3-year growth target, and the digital-transformation case made for each department to support it.</p>
+        <div class="growth-bar">
+          <div class="growth-figure">$33M</div>
+          <div class="growth-track"><div class="growth-fill" id="growthFill"></div></div>
+          <div class="growth-figure">$72M</div>
+        </div>
+        <div class="growth-caption">Targeted revenue growth over 3 years, expanding into Southern California and the Mountain States</div>
+        <div class="dept-tabs">
+          <button class="dept-tab is-active" data-dept="sales">Sales</button>
+          <button class="dept-tab" data-dept="warehouse">Warehouse</button>
+          <button class="dept-tab" data-dept="finance">Finance</button>
+          <button class="dept-tab" data-dept="it">IT</button>
+          <button class="dept-tab" data-dept="hr">HR</button>
+          <button class="dept-tab" data-dept="exec">Executive</button>
+        </div>
+        <div class="dept-panel" id="deptPanel">
+          <div class="dept-copy">
+            <div class="row"><div class="row-label">Situation</div><div class="row-text">Field reps still drive in for Monday whiteboard meetings, call customers on the Plain Old Telephone System, and run sales on paper.</div></div>
+            <div class="row"><div class="row-label">Recommendation</div><div class="row-text">A CRM for real-time customer data, remote access, and automated call logging.</div></div>
+          </div>
+          <div class="dept-benefit">
+            <div class="blabel">Cited benefit</div>
+            <div class="bstat">+29% revenue</div>
+            <div class="bstat">+34% productivity</div>
+            <div class="bstat">up to 47% better retention</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -458,8 +689,29 @@
   <a class="phone-popover-call" href="tel:+19256282202">Call</a>
 </div>
 
+<!-- Chatbot widget -->
+<button type="button" class="chat-fab" id="chatFab" aria-haspopup="dialog" aria-expanded="false">💬 Ask about me</button>
+<div class="chat-panel" id="chatPanel" role="dialog" aria-modal="false" aria-label="Ask a question about Isaac">
+  <div class="chat-head">
+    <div><strong>Ask about Isaac</strong><span>Matched against his real resume &amp; project facts</span></div>
+    <button type="button" class="chat-close" id="chatClose" aria-label="Close chat">✕</button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">Hi — ask me about Isaac's background, skills, or projects. Try one below, or type your own.</div>
+    <div class="chat-suggest-row" id="chatSuggestRow">
+      <button type="button" class="chat-suggest" data-q="What's his Tableau experience?">Tableau experience?</button>
+      <button type="button" class="chat-suggest" data-q="What is he studying right now?">Studying now?</button>
+      <button type="button" class="chat-suggest" data-q="Is he open to full-time roles?">Open to roles?</button>
+    </div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="e.g. What's his Tableau experience?" autocomplete="off">
+    <button type="button" id="chatSend">Send</button>
+  </div>
+</div>
+
 <script>
-  // Phone number popover: triggers stay hidden behind a button until clicked
+  // Phone number popover
   (function () {
     var popover = document.getElementById('phonePopover');
     var triggers = document.querySelectorAll('[data-popover-trigger="cell"]');
@@ -471,13 +723,10 @@
       var top = rect.bottom + 10;
       var left = rect.left + (rect.width / 2) - (popRect.width / 2);
       left = Math.max(12, Math.min(left, window.innerWidth - popRect.width - 12));
-      if (top + popRect.height > window.innerHeight - 12) {
-        top = rect.top - popRect.height - 10;
-      }
+      if (top + popRect.height > window.innerHeight - 12) { top = rect.top - popRect.height - 10; }
       popover.style.top = top + 'px';
       popover.style.left = left + 'px';
     }
-
     function openPopover(trigger) {
       activeTrigger = trigger;
       popover.hidden = false;
@@ -485,7 +734,6 @@
       requestAnimationFrame(function () { popover.classList.add('is-open'); });
       trigger.setAttribute('aria-expanded', 'true');
     }
-
     function closePopover() {
       if (!activeTrigger) return;
       popover.classList.remove('is-open');
@@ -494,30 +742,23 @@
       activeTrigger = null;
       setTimeout(function () { if (!activeTrigger) popover.hidden = true; }, 160);
     }
-
     triggers.forEach(function (trigger) {
       trigger.addEventListener('click', function (e) {
         e.stopPropagation();
-        if (activeTrigger === trigger) { closePopover(); }
-        else { closePopover(); openPopover(trigger); }
+        if (activeTrigger === trigger) { closePopover(); } else { closePopover(); openPopover(trigger); }
       });
     });
-
     document.addEventListener('click', function (e) {
-      if (activeTrigger && !popover.contains(e.target) && e.target !== activeTrigger) {
-        closePopover();
-      }
+      if (activeTrigger && !popover.contains(e.target) && e.target !== activeTrigger) { closePopover(); }
     });
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closePopover();
-    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePopover(); });
     window.addEventListener('resize', function () { if (activeTrigger) positionPopover(activeTrigger); });
     window.addEventListener('scroll', function () { if (activeTrigger) positionPopover(activeTrigger); }, true);
   })();
 </script>
 
 <script>
-  // Scroll-reveal via IntersectionObserver, respecting reduced-motion
+  // Scroll-reveal
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var revealEls = document.querySelectorAll('.reveal');
   if (prefersReduced || !('IntersectionObserver' in window)) {
@@ -525,16 +766,13 @@
   } else {
     var obs = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          obs.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); obs.unobserve(entry.target); }
       });
     }, { threshold: 0.12 });
     revealEls.forEach(function (el) { obs.observe(el); });
   }
 
-  // Fallback messaging if the Tableau embed fails to load
+  // Tableau embed fallback
   (function () {
     var vizCard = document.querySelector('.viz-card');
     var viz = document.getElementById('classroomViz');
@@ -544,6 +782,281 @@
     if (viz) {
       viz.addEventListener('firstinteractive', function () { clearTimeout(failTimer); });
       viz.addEventListener('vizloaderror', function () { vizCard.classList.add('no-js'); clearTimeout(failTimer); });
+    }
+  })();
+
+  // Hero stat counters
+  (function () {
+    document.querySelectorAll('.stat-card .num').forEach(function (el) {
+      var target = parseInt(el.getAttribute('data-count'), 10);
+      var cur = 0;
+      var step = Math.max(1, Math.round(target / 20));
+      var t = setInterval(function () {
+        cur += step;
+        if (cur >= target) { cur = target; clearInterval(t); }
+        el.textContent = cur;
+      }, 40);
+    });
+  })();
+
+  // Project filter chips
+  (function () {
+    var chips = document.querySelectorAll('.chip');
+    var filterables = document.querySelectorAll('.featured, .project-card, .detail-panel');
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chips.forEach(function (c) { c.classList.remove('is-active'); });
+        chip.classList.add('is-active');
+        var f = chip.getAttribute('data-filter');
+        filterables.forEach(function (el) {
+          if (el.classList.contains('detail-panel') && el.hidden) return;
+          var show = f === 'all' || el.getAttribute('data-tags') === f;
+          el.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  })();
+
+  // Expand/collapse detail panels
+  (function () {
+    document.querySelectorAll('.expand-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var panel = document.getElementById(btn.getAttribute('data-target'));
+        var open = !panel.hidden;
+        panel.hidden = open;
+        btn.setAttribute('aria-expanded', String(!open));
+        btn.querySelector('.chev') && (btn.querySelector('.chev').textContent = open ? '▾' : '▴');
+        if (!open) panel.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'nearest' });
+      });
+    });
+  })();
+
+  // Aqua Analyzer code tabs
+  (function () {
+    var tabs = document.querySelectorAll('.code-tab');
+    var panels = document.querySelectorAll('[data-code-panel]');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+        var key = tab.getAttribute('data-code');
+        panels.forEach(function (p) { p.hidden = p.getAttribute('data-code-panel') !== key; });
+      });
+    });
+  })();
+
+  // Equipment Check-Out diagram explorer
+  (function () {
+    var data = {
+      auth: { kind: 'Process', title: 'User Authentication', body: "Verifies an employee's identity before granting any system access — the original manual system had no access control at all, which let unqualified staff check out equipment they weren't trained on." },
+      manage: { kind: 'Process', title: 'Equipment Management', body: 'Logs every check-out and check-in transaction in real time and updates inventory status automatically — replacing a paper log that was the root cause of $50,000+ in annual losses.' },
+      inventory: { kind: 'Process', title: 'Inventory Control', body: 'Tracks the full $1M equipment inventory by category and required skill level, and flags items as under maintenance or decommissioned.' },
+      reporting: { kind: 'Process', title: 'Reporting & Alerts', body: 'Generates usage and maintenance reports on demand, and automatically alerts administrators to events like overdue returns or unauthorized access attempts.' },
+      usecase: { kind: 'Use case', title: 'Check-Out Equipment', body: "An employee selects the equipment they need; the system checks their skill/safety clearance and the item's availability before approving the checkout — directly addressing the safety risk in the original manual process." }
+    };
+    var buttons = document.querySelectorAll('.node-btn');
+    var detail = document.getElementById('nodeDetail');
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        buttons.forEach(function (b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+        var d = data[btn.getAttribute('data-node')];
+        detail.innerHTML = '<h4>' + d.title + '</h4><p>' + d.body + '</p>';
+      });
+    });
+  })();
+
+  // Rock Solid Industrial Parts department explorer
+  (function () {
+    var depts = {
+      sales: {
+        situation: 'Field reps still drive in for Monday whiteboard meetings, call customers on the Plain Old Telephone System, and run sales on paper.',
+        rec: 'A CRM for real-time customer data, remote access, and automated call logging.',
+        stats: ['+29% revenue', '+34% productivity', 'up to 47% better retention']
+      },
+      warehouse: {
+        situation: '80,000 SKUs tracked across a 10,000 sq ft warehouse with barcode scanners but no automated inventory system — and only one employee, who is retiring soon, fully understands it.',
+        rec: 'An inventory management system (IMS) with live stock data and demand forecasting.',
+        stats: ['+20% inventory accuracy in year one', '+30% more accurate forecasting']
+      },
+      finance: {
+        situation: 'Running Windows 7 and an outdated QuickBooks version, with paper-based reporting that slows down decisions.',
+        rec: 'Modern QuickBooks integrated with the new CRM/IMS, plus updated hardware.',
+        stats: ['up to +40% productivity', '80% of breaches tie to unpatched software']
+      },
+      it: {
+        situation: 'A 2-person IT team running consumer ADSL internet with no centralized monitoring or cybersecurity tooling.',
+        rec: 'A centralized IT management system covering network monitoring, security, and asset management.',
+        stats: ['+30% data quality', '83% of adopters hit ROI targets']
+      },
+      hr: {
+        situation: 'Paper-based HR processes — new hires in Southern California or Denver would have to travel to San Jose just for onboarding paperwork.',
+        rec: 'An HR management system (HRMS) with online recruitment forms and centralized records.',
+        stats: ['~30% more efficient recruiting']
+      },
+      exec: {
+        situation: 'No central way for leadership to see how the new CRM, IMS, and ITMS systems are performing together.',
+        rec: 'An executive dashboard (Power BI/Tableau) pulling live data from all three new systems.',
+        stats: ['-35% decision-making time', '+25% more accurate forecasts', '+40% readiness for critical events']
+      }
+    };
+    var tabs = document.querySelectorAll('.dept-tab');
+    var panel = document.getElementById('deptPanel');
+    function render(key) {
+      var d = depts[key];
+      var statsHtml = d.stats.map(function (s) { return '<div class="bstat">' + s + '</div>'; }).join('');
+      panel.innerHTML =
+        '<div class="dept-copy">' +
+          '<div class="row"><div class="row-label">Situation</div><div class="row-text">' + d.situation + '</div></div>' +
+          '<div class="row"><div class="row-label">Recommendation</div><div class="row-text">' + d.rec + '</div></div>' +
+        '</div>' +
+        '<div class="dept-benefit"><div class="blabel">Cited benefit</div>' + statsHtml + '</div>';
+    }
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+        render(tab.getAttribute('data-dept'));
+      });
+    });
+
+    // Animate the growth bar once it scrolls into view
+    var fill = document.getElementById('growthFill');
+    if (fill) {
+      var growthObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { fill.style.width = '100%'; growthObs.unobserve(entry.target); }
+        });
+      }, { threshold: 0.3 });
+      growthObs.observe(fill);
+    }
+  })();
+
+  // Chatbot widget — matches visitor questions against a knowledge base built
+  // from Isaac's real resume & project facts. Runs entirely in the browser:
+  // no backend, no API key, no cost, and it can't hallucinate facts that
+  // aren't in the list below.
+  (function () {
+    var fab = document.getElementById('chatFab');
+    var panel = document.getElementById('chatPanel');
+    var closeBtn = document.getElementById('chatClose');
+    var messages = document.getElementById('chatMessages');
+    var input = document.getElementById('chatInput');
+    var sendBtn = document.getElementById('chatSend');
+    var suggestRow = document.getElementById('chatSuggestRow');
+
+    var KNOWLEDGE_BASE = [
+      {
+        keywords: ['tableau', 'dashboard', 'visualization', 'heat map', 'heatmap'],
+        answer: "Isaac built a live Tableau dashboard for SJSU's parking department — a heat map at 15-minute granularity, a date/time selector, a comparison bar chart, and a multi-year trend chart. It was presented to the parking department and IT, and the prototype was adopted as the model for IT's own build-out. You can try the actual dashboard in the Projects section above."
+      },
+      {
+        keywords: ['python', 'streamlit', 'code', 'coding', 'programming', 'sql', 'gpt', 'openai', 'llm', 'pdf'],
+        answer: "Isaac works in Python and SQL, and has built Streamlit apps — including Aqua Analyzer, which extracts text from PDF reports and uses GPT to summarize and answer questions about it. The real code snippets are in the Aqua Analyzer card under Projects."
+      },
+      {
+        keywords: ['education', 'degree', 'school', 'university', 'college', 'study', 'studying', 'sjsu', 'jose state', 'mis', 'major'],
+        answer: "Isaac has a B.S. in Business Administration with a concentration in Management Information Systems from San José State University (2023–2025)."
+      },
+      {
+        keywords: ['master', 'masters', "master's", 'east bay', 'msba', 'grad school', 'graduate'],
+        answer: "Isaac is currently pursuing a Master of Science in Business Analytics at Cal State East Bay, starting Fall 2026."
+      },
+      {
+        keywords: ['certificate', 'certification', 'certified', 'google data'],
+        answer: "Isaac holds the Google Data Analytics Professional Certificate (2025)."
+      },
+      {
+        keywords: ['skill', 'skills', 'strength', 'good at', 'expertise', 'tools', 'toolkit'],
+        answer: "His core toolkit is Tableau, SQL, Excel, Python, and Streamlit, with hands-on experience in data cleaning, dashboard design, systems design, process analysis, and LLM/GPT integration. See the Skills section above for the full list."
+      },
+      {
+        keywords: ['aqua', 'water', 'analyzer'],
+        answer: "Aqua Analyzer is a Streamlit app Isaac helped build that extracts text from monthly water quality PDF reports and uses GPT to generate plain-language summaries and answer residents' questions about water quality and minerals. Real code from the project is shown in the Projects section."
+      },
+      {
+        keywords: ['equipment', 'check-out', 'checkout', 'inventory', 'consulting'],
+        answer: "For the Equipment Check-Out System Enhancement project, Isaac analyzed a manual check-out process that was costing a small consulting firm over $50,000/year in lost or stolen equipment, then designed use cases and a Level 0 Data Flow Diagram for a fix. Explore the actual diagram in the Projects section."
+      },
+      {
+        keywords: ['rock solid', 'industrial', 'case study', 'business strategy', 'parts company'],
+        answer: "The Rock Solid Industrial Parts case study looked at a plan to grow a family-owned industrial parts company from $33M to $72M in revenue over three years, and what systems (CRM, inventory management, HRMS, and more) each department would need to support that growth. Click through each department in the Projects section."
+      },
+      {
+        keywords: ['hire', 'hiring', 'available', 'open to', 'job', 'full-time', 'fulltime', 'relocat', 'looking for work', 'role'],
+        answer: "Yes — Isaac is currently open to full-time roles. The best way to reach him is by email at izzyzalis@gmail.com or via LinkedIn, both linked at the top of the page."
+      },
+      {
+        keywords: ['contact', 'email', 'reach', 'linkedin', 'phone', 'number', 'call', 'cell'],
+        answer: "You can email Isaac directly at izzyzalis@gmail.com or connect on LinkedIn (both linked above). For his phone number, click the \"Cell number\" button in the hero section or footer."
+      },
+      {
+        keywords: ['who is', 'about isaac', 'background', 'tell me about', 'what does he do'],
+        answer: "Isaac Zalis is an MIS & Analytics professional and SJSU MIS graduate, currently pursuing a Master's in Business Analytics at Cal State East Bay. He builds dashboards and tools that turn raw data into decisions — see the Projects section for examples."
+      },
+      {
+        keywords: ['hi', 'hello', 'hey', 'sup', "what's up"],
+        answer: "Hey! Ask me about Isaac's education, skills, or any of the projects below — try one of the suggestions above the input box."
+      }
+    ];
+
+    var FALLBACK = "I don't have that on file. The best way to get a real answer is to email Isaac directly at izzyzalis@gmail.com.";
+
+    function findAnswer(question) {
+      var q = question.toLowerCase();
+      var best = null;
+      var bestScore = 0;
+      KNOWLEDGE_BASE.forEach(function (entry) {
+        var score = 0;
+        entry.keywords.forEach(function (kw) {
+          if (q.indexOf(kw) !== -1) score += kw.length; // longer/more specific matches win ties
+        });
+        if (score > bestScore) { bestScore = score; best = entry; }
+      });
+      return best ? best.answer : FALLBACK;
+    }
+
+    function open() {
+      panel.classList.add('is-open');
+      fab.setAttribute('aria-expanded', 'true');
+      input.focus();
+    }
+    function close() {
+      panel.classList.remove('is-open');
+      fab.setAttribute('aria-expanded', 'false');
+    }
+    fab.addEventListener('click', function () {
+      panel.classList.contains('is-open') ? close() : open();
+    });
+    closeBtn.addEventListener('click', close);
+
+    function addMsg(text, role) {
+      var div = document.createElement('div');
+      div.className = 'chat-msg ' + role;
+      div.textContent = text;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+      return div;
+    }
+
+    function ask(text) {
+      text = text.trim();
+      if (!text) return;
+      addMsg(text, 'user');
+      if (suggestRow) { suggestRow.remove(); suggestRow = null; }
+      input.value = '';
+      var thinking = addMsg('Thinking…', 'bot');
+      setTimeout(function () {
+        thinking.textContent = findAnswer(text);
+      }, 280); // brief delay so it reads as a real reply, not a lookup table
+    }
+
+    sendBtn.addEventListener('click', function () { ask(input.value); });
+    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') ask(input.value); });
+    if (suggestRow) {
+      suggestRow.querySelectorAll('.chat-suggest').forEach(function (btn) {
+        btn.addEventListener('click', function () { ask(btn.getAttribute('data-q')); });
+      });
     }
   })();
 </script>
