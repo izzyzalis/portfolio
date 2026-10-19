@@ -396,6 +396,7 @@
 
     <div class="contact-row">
       <a class="btn btn-primary" href="mailto:izzyzalis@gmail.com">Email me</a>
+      <a class="btn btn-ghost" href="Isaac_Zalis_Resume.pdf" download>Download résumé ↓</a>
       <button type="button" class="btn btn-ghost" data-popover-trigger="cell" aria-haspopup="dialog" aria-expanded="false">Cell number</button>
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/isaac-zalis" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn btn-ghost" href="#projects">View the live dashboard ↓</a>
@@ -679,7 +680,7 @@ user_question = st.chat_input(<span class="str">"Ask a question about the water 
 
 <footer>
   <div class="wrap">
-    <p>Isaac Zalis · <a href="mailto:izzyzalis@gmail.com">izzyzalis@gmail.com</a> · <button type="button" class="footer-link-btn" data-popover-trigger="cell" aria-haspopup="dialog" aria-expanded="false">Cell number</button> · <a href="https://www.linkedin.com/in/isaac-zalis" target="_blank" rel="noopener">LinkedIn</a></p>
+    <p>Isaac Zalis · <a href="mailto:izzyzalis@gmail.com">izzyzalis@gmail.com</a> · <button type="button" class="footer-link-btn" data-popover-trigger="cell" aria-haspopup="dialog" aria-expanded="false">Cell number</button> · <a href="https://www.linkedin.com/in/isaac-zalis" target="_blank" rel="noopener">LinkedIn</a> · <a href="Isaac_Zalis_Resume.pdf" download>Résumé</a></p>
   </div>
 </footer>
 
@@ -984,6 +985,10 @@ user_question = st.chat_input(<span class="str">"Ask a question about the water 
       {
         keywords: ['contact', 'email', 'reach', 'linkedin', 'phone', 'number', 'call', 'cell'],
         answer: "You can email Isaac directly at izzyzalis@gmail.com or connect on LinkedIn (both linked above). For his phone number, click the \"Cell number\" button in the hero section or footer."
+      },
+      {
+        keywords: ['resume', 'résumé', 'cv', 'download'],
+        answer: "You can download Isaac's résumé as a PDF — click \"Download résumé\" at the top of the page or \"Résumé\" in the footer."
       },
       {
         keywords: ['who is', 'about isaac', 'background', 'tell me about', 'what does he do'],
